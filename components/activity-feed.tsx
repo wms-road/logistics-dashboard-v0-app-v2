@@ -34,11 +34,11 @@ function makeItem(seq: number): Item {
 
 export function ActivityFeed() {
   const seqRef = useRef(0)
-  const [items, setItems] = useState<Item[]>(() =>
-    Array.from({ length: 7 }, () => makeItem(seqRef.current++)),
-  )
+  // 初始为空，仅在客户端挂载后生成，避免随机/时间导致的水合不匹配
+  const [items, setItems] = useState<Item[]>([])
 
   useEffect(() => {
+    setItems(Array.from({ length: 7 }, () => makeItem(seqRef.current++)))
     const id = setInterval(() => {
       setItems((prev) => [makeItem(seqRef.current++), ...prev].slice(0, 9))
     }, 1800)
