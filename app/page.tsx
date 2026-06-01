@@ -4,20 +4,28 @@ import { StatCards } from "@/components/stat-cards"
 import { RouteList } from "@/components/route-list"
 import { ActivityFeed } from "@/components/activity-feed"
 import WorldMap from "@/components/world-map"
+import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeSwitcher } from "@/components/theme-switcher"
 import { hubs, countries } from "@/lib/geo-data"
 
 export default function Page() {
   return (
-    <main className="bg-grid relative flex h-dvh flex-col overflow-hidden">
-      {/* 顶部光晕 */}
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-64"
-        style={{
-          background: "radial-gradient(ellipse at 50% 0%, rgba(60,140,180,0.18), transparent 70%)",
-        }}
-      />
+    <ThemeProvider>
+      <main className="bg-grid relative flex h-dvh flex-col overflow-hidden">
+        {/* 顶部光晕 */}
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 h-64"
+          style={{
+            background: "radial-gradient(ellipse at 50% 0%, var(--top-glow), transparent 70%)",
+          }}
+        />
 
-      <DashboardHeader />
+        {/* 主题切换器 */}
+        <div className="pointer-events-none absolute right-4 top-16 z-30">
+          <ThemeSwitcher />
+        </div>
+
+        <DashboardHeader />
 
       <div className="grid min-h-0 flex-1 grid-cols-12 grid-rows-1 gap-3 overflow-hidden p-3">
         {/* 左侧 */}
